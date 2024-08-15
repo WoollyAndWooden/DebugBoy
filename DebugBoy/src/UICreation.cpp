@@ -2,6 +2,8 @@
 #include "utils.h"
 #include <iostream>
 #include <imgui.h>
+#include <tinyfiledialogs.h>
+#include <unordered_set>
 
 void DrawMainMenuBar()
 {
@@ -11,7 +13,14 @@ void DrawMainMenuBar()
             {
                 if(ImGui::MenuItem("Open"))
                 {
-                    std::cout << OpenFile() << "\n";
+                    char const * lFilterPatterns[2]={"*.gb", "*.gbc"};
+                    std::string chosenFile = tinyfd_openFileDialog(NULL,
+                                                NULL, 
+                                                2, 
+                                                lFilterPatterns, 
+                                                "ROM file", 
+                                                0);
+                    std::cout << chosenFile << "\n";
                 }
                 ImGui::EndMenu();
             }

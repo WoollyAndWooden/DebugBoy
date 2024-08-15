@@ -4,17 +4,7 @@ project(DebugBoy VERSION 0.0.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Windows specific
-if(WIN32)
-    set(INCLUDE_OS_SPECIFIC Win32Include) #include files for specific OS
-    set(SRC_OS_SPECIFIC src/Win32Src)
-    set(EXEC_OS_SPECIFIC ${SRC_OS_SPECIFIC}/CommonFileDialog.cpp)
-else()
-    set(INCLUDE_OS_SPECIFIC)
-    set(EXEC_OS_SPECIFIC)
-endif()
-
-include_directories(include ${INCLUDE_OS_SPECIFIC})
+include_directories(include)
 
 set(SOURCES src/main.cpp
     src/UICreation.cpp
@@ -24,6 +14,7 @@ set(SOURCES src/main.cpp
 find_package(imgui CONFIG REQUIRED)
 find_package(SDL2 CONFIG REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(tinyfiledialogs REQUIRED)
 
 
 add_executable(DebugBoy ${SOURCES})
@@ -36,9 +27,4 @@ endif()
 target_link_libraries(DebugBoy PUBLIC SDL2::SDL2)
 target_link_libraries(DebugBoy PUBLIC OpenGL::GL)
 target_link_libraries(DebugBoy PRIVATE imgui::imgui)
-# Neccessary for Windows COM
-if(WIN32)
-    target_link_libraries(DebugBoy PRIVATE Comctl32.lib)
-    target_link_libraries(DebugBoy PRIVATE Propsys.lib)
-    target_link_libraries(DebugBoy PRIVATE Shlwapi.lib)
-endif()
+target_link_libraries(DebugBoy PRIVATE tinyfiledialogs::tinyfiledialogs)
