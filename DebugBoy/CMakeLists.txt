@@ -5,10 +5,13 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include_directories(include)
+include_directories(include/GameBoyComponents)
 
 set(SOURCES src/main.cpp
     src/UICreation.cpp
     src/utils.cpp
+    src/GameBoy.cpp
+    src/GameBoyComponents/CPU.cpp
 )
 
 find_package(imgui CONFIG REQUIRED)

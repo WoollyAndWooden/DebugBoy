@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "UICreation.h"
+#include "GameBoy.h"
 #include <imgui.h>
 #include <imgui_impl_sdl2.h>
 #include <imgui_impl_opengl3.h>
@@ -9,6 +10,7 @@
 #else
 #include <SDL_opengl.h>
 #endif
+#include <memory>
 
 int main(int argc, char *argv[]){
     printf("Launching app\n");
@@ -94,6 +96,12 @@ int main(int argc, char *argv[]){
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
+    // Create MainMenuBarChoice to control passing new options
+    MainMenuBarChoice MainMenuBarControls;
+
+    // Declare GameBoy
+    std::unique_ptr<GameBoy> gb;
+
     // Main loop
     bool done = false;
     while (!done)
@@ -123,9 +131,10 @@ int main(int argc, char *argv[]){
         ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
 
-        // Create Main bar. It'll be used to open new instances of emulator.
-        DrawMainMenuBar();
-
+        // Create and handle Main bar. It'll be used to open new instances and additional emulator windows.
+        DrawMainMenuBar(&MainMenuBarControls);
+        HandleMainMenuBar(&MainMenuBarControls, gb);
+        
         // Rendering
         ImGui::Render();
         glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
