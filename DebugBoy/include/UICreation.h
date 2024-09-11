@@ -2,6 +2,7 @@
 #include <string>
 #include <memory>
 #include "GameBoy.h"
+#include "utils.h"
 
 // Used to control changes from Main Menu Bar
 struct MainMenuBarChoice
@@ -17,3 +18,5 @@ void HandleMainMenuBar(MainMenuBarChoice * controls, std::unique_ptr<GameBoy>& g
 
 // Render instance specific windows
 void RenderGBWindows(MainMenuBarChoice * controls, std::unique_ptr<GameBoy>& gb);
+
+void RenderGBRegistry(registryParse parse);

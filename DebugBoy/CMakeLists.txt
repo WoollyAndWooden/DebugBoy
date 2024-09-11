@@ -10,8 +10,9 @@ include_directories(include/GameBoyComponents)
 set(SOURCES src/main.cpp
     src/UICreation.cpp
     src/utils.cpp
-    src/GameBoy.cpp
     src/GameBoyComponents/CPU.cpp
+    src/GameBoyComponents/Memory.cpp
+    src/GameBoy.cpp
 )
 
 find_package(imgui CONFIG REQUIRED)

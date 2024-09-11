@@ -3,9 +3,20 @@
     "configurePresets": [
         {
             "name": "defaultWindows",
-            "binaryDir": "${sourceDir}/build/defaultWindows",
+            "displayName": "Windows Release version",
+            "binaryDir": "${sourceDir}/build/defaultWindowsRelease",
             "cacheVariables": {
-                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "defaultWindowsDebug",
+            "displayName": "Windows Debug version",
+            "binaryDir": "${sourceDir}/build/defaultWindowsDebug",
+            "cacheVariables": {
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                "CMAKE_BUILD_TYPE": "Debug"
             }
         }
     ]
